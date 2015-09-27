@@ -1,0 +1,26 @@
+{
+  "name": "ng-improved-testing",
+  "version": "0.3.0",
+  "main": "./ng-improved-testing.js",
+  "authors": [
+    "Emil van Galen <emil.van.galen@gmail.com>"
+  ],
+  "dependencies": {
+    "angular": "~1.3",
+    "ng-module-introspector": "0.3.0",
+    "angular-mocks": "~1.3"
+  },
+  "devDependencies": {
+    "jasmine": "1.3.1"
+  },
+  "homepage": "https://github.com/evangalen/bower-ng-improved-testing",
+  "_release": "0.3.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.3.0",
+    "commit": "2b4b7d56f10299ef15873a7295a94e39d7a7c1f9"
+  },
+  "_source": "git://github.com/evangalen/bower-ng-improved-testing.git",
+  "_target": "~0.3.0",
+  "_originalSource": "ng-improved-testing"
+}

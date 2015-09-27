@@ -1,0 +1,12 @@
+{
+  "name": "ng-module-introspector",
+  "version": "0.3.0",
+  "main": "./ng-module-introspector.js",
+  "authors": [
+    "Emil van Galen <emil.van.galen@gmail.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "angular": "~1.3"
+  }
+}
