@@ -10,6 +10,21 @@
     "animate.css": "~3.4.0",
     "angular": "~1.4.2"
   },
+  "ignore" : [
+    "src",
+    "typings",
+    "node_modules",
+    ".bowerrc",
+    ".gitignore",
+    ".eslintrc",
+    ".editorconfig",
+    "bower.json",
+    "package.json",
+    "coverage",
+    ".vscode",
+    "bower_components",
+    "README.md"
+  ],
   "devDependencies": {
     "angular-mocks": "~1.4.2",
     "ng-improved-testing": "~0.3.0"
