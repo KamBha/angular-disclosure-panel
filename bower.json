@@ -21,7 +21,13 @@
     "coverage",
     ".vscode",
     "bower_components",
-    "README.md"
+    "README.md",
+    "gulp",
+    "protractor.conf",
+    "karma.conf",
+    ".yo-rc.json",
+    "jsconfig.json",
+    "gulpfile.js",
   ],
   "devDependencies": {
     "angular-mocks": "~1.4.0",
