@@ -2,4 +2,5 @@ coverage/
 .sass-cache/
 .idea/
 .tmp/
+node_modules/
 
