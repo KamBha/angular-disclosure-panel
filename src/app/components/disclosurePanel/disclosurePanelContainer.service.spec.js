@@ -13,7 +13,7 @@ describe('directive disclosure panel', function() {
   }));
 
   it('should set class to open when attribute specifies it is currently open', inject(function() {
-    var element = $compile(`<div dp-disclosure-panel-container is-initially-open="true"></div>`)($rootScope);
+    var element = $compile(`<div dp-container is-initially-open="true"></div>`)($rootScope);
     $rootScope.$apply();
 
     expect(element.hasClass('dp-open')).toBe(true);
@@ -22,7 +22,7 @@ describe('directive disclosure panel', function() {
 
   it('should set class to closed when attribute specified it is currently closed', inject(function() {
     $rootScope.isInitiallyOpen = false;
-    var element = $compile(`<div dp-disclosure-panel-container is-initially-open="isInitiallyOpen"></div>`)($rootScope);
+    var element = $compile(`<div dp-container is-initially-open="isInitiallyOpen"></div>`)($rootScope);
     $rootScope.$apply();
 
     expect(element.hasClass('dp-open')).toBe(false);
@@ -31,7 +31,7 @@ describe('directive disclosure panel', function() {
   
   it('should not change class when is initially open is changed', inject(function() {
     $rootScope.isInitiallyOpen = false;
-    var element = $compile(`<div dp-disclosure-panel-container is-initially-open="isInitiallyOpen"></div>`)($rootScope);
+    var element = $compile(`<div dp-container is-initially-open="isInitiallyOpen"></div>`)($rootScope);
     
     $rootScope.$apply();
     $rootScope.isInitiallyOpen = true;
@@ -42,9 +42,9 @@ describe('directive disclosure panel', function() {
   
   it('should change class when toggle is called', inject(function() {
     $rootScope.isInitiallyOpen = false;
-    var element = $compile(`<div dp-disclosure-panel-container is-initially-open="isInitiallyOpen"></div>`)($rootScope);
+    var element = $compile(`<div dp-container is-initially-open="isInitiallyOpen"></div>`)($rootScope);
     $rootScope.$apply();
-    element.controller('dpDisclosurePanelContainer').toggle();
+    element.controller('dpContainer').toggle();
     
     expect(element.hasClass('dp-open')).toBe(true);
     expect(element.hasClass('dp-close')).toBe(false);

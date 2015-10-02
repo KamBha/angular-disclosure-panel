@@ -14,9 +14,9 @@ describe('directive disclosure reveal on close', function() {
 
   it('should reveal on close panel when initially closed', inject(function() {
     $rootScope.isInitiallyOpen = false;
-    var element = $compile(`<div dp-disclosure-panel-container is-initially-open="isInitiallyOpen">
-                              <p class="toggler" dp-disclosure-panel-toggler>Toggle</p>
-                              <header dp-disclosure-panel-reveal-on-close>Howdy</header>
+    var element = $compile(`<div dp-container is-initially-open="isInitiallyOpen">
+                              <p class="toggler" dp-toggler>Toggle</p>
+                              <header dp-reveal-on-close>Howdy</header>
                            </div>`)($rootScope);
     $rootScope.$apply();
 
@@ -25,9 +25,9 @@ describe('directive disclosure reveal on close', function() {
   
   it('should not reveal on close panel when initially open', inject(function() {
     $rootScope.isInitiallyOpen = true;
-    var element = $compile(`<div dp-disclosure-panel-container is-initially-open="isInitiallyOpen">
-                              <p class="toggler" dp-disclosure-panel-toggler>Toggle</p>
-                              <header dp-disclosure-panel-reveal-on-close>Howdy</header>
+    var element = $compile(`<div dp-container is-initially-open="isInitiallyOpen">
+                              <p class="toggler" dp-toggler>Toggle</p>
+                              <header dp-reveal-on-close>Howdy</header>
                            </div>`)($rootScope);
     $rootScope.$apply();
 
@@ -36,9 +36,9 @@ describe('directive disclosure reveal on close', function() {
 
   it('should reveal on close panel when toggled close', inject(function() {
     $rootScope.isInitiallyOpen = true;
-    var element = $compile(`<div dp-disclosure-panel-container is-initially-open="isInitiallyOpen">
-                              <p class="toggler" dp-disclosure-panel-toggler>Toggle</p>
-                              <header dp-disclosure-panel-reveal-on-close>Howdy</header>
+    var element = $compile(`<div dp-container is-initially-open="isInitiallyOpen">
+                              <p class="toggler" dp-toggler>Toggle</p>
+                              <header dp-reveal-on-close>Howdy</header>
                            </div>`)($rootScope);
     var trigger = element.find('p');
     $rootScope.$apply();                        
@@ -50,9 +50,9 @@ describe('directive disclosure reveal on close', function() {
   
   it('should not reveal on close panel when toggled open', inject(function() {
     $rootScope.isInitiallyOpen = false;
-    var element = $compile(`<div dp-disclosure-panel-container is-initially-open="isInitiallyOpen">
-                              <p class="toggler" dp-disclosure-panel-toggler>Toggle</p>
-                              <header dp-disclosure-panel-reveal-on-close>Howdy</header>
+    var element = $compile(`<div dp-container is-initially-open="isInitiallyOpen">
+                              <p class="toggler" dp-toggler>Toggle</p>
+                              <header dp-reveal-on-close>Howdy</header>
                            </div>`)($rootScope);
     var trigger = element.find('p');
     $rootScope.$apply();                        

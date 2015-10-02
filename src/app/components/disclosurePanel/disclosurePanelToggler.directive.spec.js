@@ -14,8 +14,8 @@ describe('directive disclosure panel toggler', function() {
 
   it('should update class on disclosure panel', inject(function() {
     $rootScope.isInitiallyOpen = false;
-    var element = $compile(`<div dp-disclosure-panel-container is-initially-open="isInitiallyOpen">
-                              <p class="toggler" dp-disclosure-panel-toggler>Toggle</p>
+    var element = $compile(`<div dp-container is-initially-open="isInitiallyOpen">
+                              <p class="toggler" dp-toggler>Toggle</p>
                            </div>`)($rootScope);
     $rootScope.$apply();
     expect(element.hasClass('dp-open')).toBe(false);
@@ -30,8 +30,8 @@ describe('directive disclosure panel toggler', function() {
 
   it('should update class on trigger', inject(function() {
     $rootScope.isInitiallyOpen = false;
-    var element = $compile(`<div dp-disclosure-panel-container is-initially-open="isInitiallyOpen">
-                              <p class="toggler" dp-disclosure-panel-toggler>Toggle</p>
+    var element = $compile(`<div dp-container is-initially-open="isInitiallyOpen">
+                              <p class="toggler" dp-toggler>Toggle</p>
                            </div>`)($rootScope);
     var trigger = element.find('p');
     $rootScope.$apply();
