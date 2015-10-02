@@ -7,9 +7,9 @@ import { DisclosurePanelRevealOnCloseDirective } from '../app/components/disclos
 import { disclosurePanelRevealLinkGeneratorService } from '../app/components/disclosurePanel/disclosurePanelRevealLinkGenerator.service';
 
 angular.module('disclosurePanel', ['ngAnimate'])
-  .directive('dpDisclosurePanelContainer', DisclosurePanelContainerDirective)
-  .directive('dpDisclosurePanelToggler', DisclosurePanelTogglerDirective)
-  .directive('dpDisclosurePanelRevealOnOpen', DisclosurePanelRevealOnOpenDirective)
-  .directive('dpDisclosurePanelRevealOnClose', DisclosurePanelRevealOnCloseDirective)
+  .directive('dpContainer', DisclosurePanelContainerDirective)
+  .directive('dpToggler', DisclosurePanelTogglerDirective)
+  .directive('dpRevealOnOpen', DisclosurePanelRevealOnOpenDirective)
+  .directive('dpRevealOnClose', DisclosurePanelRevealOnCloseDirective)
   .factory('disclosurePanelRevealLinkGeneratorService', disclosurePanelRevealLinkGeneratorService)
 ;

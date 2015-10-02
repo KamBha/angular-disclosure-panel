@@ -5,8 +5,7 @@ export function DisclosurePanelRevealOnCloseDirective(disclosurePanelRevealLinkG
     restrict: 'A',
     link: disclosurePanelRevealLinkGeneratorService.generateLinkFunction(function(value) { return !value; }, 'dpRevealOnClose'),
     transclude: 'element',
-    $$tlb: true,
-    require: '^dpDisclosurePanelContainer'
+    require: '^dpContainer'
   };
 
   return directive;

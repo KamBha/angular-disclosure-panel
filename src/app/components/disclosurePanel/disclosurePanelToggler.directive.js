@@ -4,7 +4,7 @@ export function DisclosurePanelTogglerDirective($log) {
   let directive = {
     restrict: 'A',
     link: link,
-    require: '^dpDisclosurePanelContainer'
+    require: '^dpContainer'
   };
 
   return directive;
