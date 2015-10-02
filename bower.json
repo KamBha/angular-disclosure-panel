@@ -1,14 +1,14 @@
 {
   "name": "disclosurePanel",
   "main": "./dist/scripts/app.js",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "dependencies": {
     "angular-animate": "~1.4.0",
     "jquery": "~2.1.4",
     "animate.css": "~3.4.0",
     "angular": "~1.4.0"
   },
-  "ignore" : [
+  "ignore": [
     "src",
     "typings",
     "node_modules",
