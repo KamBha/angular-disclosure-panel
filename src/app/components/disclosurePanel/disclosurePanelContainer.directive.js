@@ -15,12 +15,13 @@ export function DisclosurePanelContainerDirective() {
 }
 
 class DisclosurePanelController {
-  constructor ($scope, $element) {
+  constructor ($scope, $element, disclosurePanelDefaults) {
     'ngInject';
 
     this.isOpen = $scope.disclosurePanelController.isInitiallyOpen;
     this.$scope = $scope;
     this.$element = $element;
+    this.disclosurePanelDefaults = disclosurePanelDefaults;
     this._init();
   }
   
@@ -39,12 +40,12 @@ class DisclosurePanelController {
 
   updateClass(elem) {
     if (this.isOpen) {
-      elem.addClass('dp-open');
-      elem.removeClass('dp-close');
+      elem.addClass(this.disclosurePanelDefaults.openClass);
+      elem.removeClass(this.disclosurePanelDefaults.closeClass);
     }
     else {
-      elem.removeClass('dp-open');
-      elem.addClass('dp-close');
+      elem.removeClass(this.disclosurePanelDefaults.openClass);
+      elem.addClass(this.disclosurePanelDefaults.closeClass);
     }
   }
   

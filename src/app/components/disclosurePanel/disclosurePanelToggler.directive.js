@@ -14,6 +14,7 @@ export function DisclosurePanelTogglerDirective($log) {
     
     scope.$on('destroy', destroy);
     disclosurePanelController.updateClass(element);
+
     function clickHandler() {
       disclosurePanelController.toggle();
       disclosurePanelController.updateClass(element);

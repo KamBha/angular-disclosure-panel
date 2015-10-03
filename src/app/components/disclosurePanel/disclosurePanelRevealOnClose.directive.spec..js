@@ -3,15 +3,21 @@
 describe('directive disclosure reveal on close', function() {
   let $compile;
   let $rootScope;
+  let provider;
   
-  beforeEach(ModuleBuilder.forModules('disclosurePanel').build());
+    beforeEach(angular.mock.module('disclosurePanel'));
 
+  beforeEach(function() {
+    angular.mock.module(function(disclosurePanelDefaultsProvider) {
+      provider = disclosurePanelDefaultsProvider;
+    });
+  });
   beforeEach(inject(function(_$compile_, _$rootScope_) {
-    // The injector unwraps the underscores (_) from around the parameter names when matching
+        // The injector unwraps the underscores (_) from around the parameter names when matching
     $compile = _$compile_;
     $rootScope = _$rootScope_;
   }));
-
+  
   it('should reveal on close panel when initially closed', inject(function() {
     $rootScope.isInitiallyOpen = false;
     var element = $compile(`<div dp-container is-initially-open="isInitiallyOpen">

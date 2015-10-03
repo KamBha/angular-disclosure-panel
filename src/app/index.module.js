@@ -6,10 +6,13 @@ import { DisclosurePanelRevealOnCloseDirective } from '../app/components/disclos
 
 import { disclosurePanelRevealLinkGeneratorService } from '../app/components/disclosurePanel/disclosurePanelRevealLinkGenerator.service';
 
+import { DisclosurePanelDefaultsProvider } from '../app/components/disclosurePanel/disclosurePanelDefaults.provider';
+
 angular.module('disclosurePanel', ['ngAnimate'])
   .directive('dpContainer', DisclosurePanelContainerDirective)
   .directive('dpToggler', DisclosurePanelTogglerDirective)
   .directive('dpRevealOnOpen', DisclosurePanelRevealOnOpenDirective)
   .directive('dpRevealOnClose', DisclosurePanelRevealOnCloseDirective)
+  .provider('disclosurePanelDefaults', DisclosurePanelDefaultsProvider)
   .factory('disclosurePanelRevealLinkGeneratorService', disclosurePanelRevealLinkGeneratorService)
 ;
