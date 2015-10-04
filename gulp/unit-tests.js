@@ -53,6 +53,6 @@ gulp.task('test:auto', ['scripts:test-watch'], function(done) {
 });
 
 
-gulp.task('test:sauce', ['scripts:test-watch'], function(done) {
-  runTests(false, done, true);
+gulp.task('test:sauce', ['scripts:test'], function(done) {
+  runTests(true, done, true);
 });
