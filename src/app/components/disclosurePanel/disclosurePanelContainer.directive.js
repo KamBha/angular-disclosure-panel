@@ -14,11 +14,13 @@ export function DisclosurePanelContainerDirective() {
   return directive;
 }
 
+let data = { isOpen : null };
+
 class DisclosurePanelController {
   constructor ($scope, $element, disclosurePanelDefaults) {
     'ngInject';
 
-    this.isOpen = $scope.disclosurePanelController.isInitiallyOpen;
+    data.isOpen = $scope.disclosurePanelController.isInitiallyOpen;
     this.$scope = $scope;
     this.$element = $element;
     this.disclosurePanelDefaults = disclosurePanelDefaults;
@@ -33,9 +35,18 @@ class DisclosurePanelController {
     let onDestroy = () => {
       this.removeWatcher();
     }
+
     isOpenWatcher(this.isOpen);
     this.removeWatcher = this.$scope.$watch('disclosurePanelController.isOpen', isOpenWatcher);
     this.$scope.$on('$destroy', onDestroy);
+  }
+
+  get isOpen() {
+    return data.isOpen;
+  }
+  
+  set isOpen(newIsOpen) {
+    data.isOpen = newIsOpen;
   }
 
   updateClass(elem) {

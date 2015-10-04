@@ -3,13 +3,11 @@
 describe('directive disclosure reveal on close', function() {
   let $compile;
   let $rootScope;
-  let provider;
   
     beforeEach(angular.mock.module('disclosurePanel'));
 
   beforeEach(function() {
-    angular.mock.module(function(disclosurePanelDefaultsProvider) {
-      provider = disclosurePanelDefaultsProvider;
+    angular.mock.module(function() {
     });
   });
   beforeEach(inject(function(_$compile_, _$rootScope_) {
