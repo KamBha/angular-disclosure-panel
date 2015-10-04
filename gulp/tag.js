@@ -29,6 +29,16 @@ function inc(importance) {
         .pipe(tag_version());
 }
 
-gulp.task('patch', ['build'], function() { return inc('patch'); })
-gulp.task('feature', ['build'], function() { return inc('minor'); })
-gulp.task('release', ['build'], function() { return inc('major'); })
+
+gulp.task('prepare-tag', ['build'], function() { 
+    return gulp.src('./dist')
+               .pipe(git.add())
+               .pipe(git.commit(undefined, {
+                   args: '-a -m "Committing dist folder as preparation for tagging"',
+                   disableMessageRequirement: true
+               }));
+});
+
+gulp.task('patch', ['prepare-tag'], function() { return inc('patch'); })
+gulp.task('feature', ['prepare-tag'], function() { return inc('minor'); })
+gulp.task('release', ['prepare-tag'], function() { return inc('major'); })
