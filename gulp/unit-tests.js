@@ -14,9 +14,10 @@ var pathSrcJs = [
   path.join(conf.paths.tmp, '/serve/app/index.module.js')
 ];
 
-function runTests (singleRun, done) {
+function runTests (singleRun, done, saucelabs) {
   var reporters = ['progress'];
   var preprocessors = {};
+  var karmaFile = saucelabs ?  '/../karma.conf-ci.js' : '/../karma.conf.js';  
 
   pathSrcHtml.forEach(function(path) {
     preprocessors[path] = ['ng-html2js'];
@@ -30,7 +31,7 @@ function runTests (singleRun, done) {
   }
 
   var localConfig = {
-    configFile: path.join(__dirname, '/../karma.conf.js'),
+    configFile: path.join(__dirname, karmaFile),
     singleRun: singleRun,
     autoWatch: !singleRun,
     reporters: reporters,
@@ -49,4 +50,9 @@ gulp.task('test', ['scripts:test'], function(done) {
 
 gulp.task('test:auto', ['scripts:test-watch'], function(done) {
   runTests(false, done);
+});
+
+
+gulp.task('test:sauce', ['scripts:test-watch'], function(done) {
+  runTests(false, done, true);
 });
