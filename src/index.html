@@ -25,6 +25,21 @@
     <![endif]-->
 
     <div class="container">      
+      
+      <div dp-container is-initially-open="true">
+        <div class="toggler" dp-toggler>Toggle</div>
+        <div>Here is some text outside of the main panel</div>
+        <div dp-reveal-on-close>
+          <h2>On Close</h2>
+          <p>Some Text</p>
+        </div>
+       
+        <div dp-reveal-on-open>
+          <h2>On Open</h2>
+          <p>some other text</p>
+        </div>
+      </div>
+      <div>Some other content</div>
       <div dp-container is-initially-open="true">
         <div class="toggler" dp-toggler>Toggle</div>
         <div>Here is some text outside of the main panel</div>

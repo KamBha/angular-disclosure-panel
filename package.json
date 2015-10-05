@@ -1,6 +1,6 @@
 {
   "name": "disclosurePanel",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "dependencies": {},
   "scripts": {
     "test": "gulp test:sauce"
@@ -14,7 +14,7 @@
     "del": "~2.0.1",
     "eslint-loader": "~1.0.0",
     "eslint-plugin-angular": "~0.11.0",
-    "gulp": "~3.9.0",
+    "gulp": "^3.9.0",
     "gulp-angular-templatecache": "~1.7.0",
     "gulp-autoprefixer": "~3.0.1",
     "gulp-bump": "^1.0.0",
@@ -26,6 +26,7 @@
     "gulp-load-plugins": "~0.10.0",
     "gulp-minify-css": "~1.2.1",
     "gulp-minify-html": "~1.0.4",
+    "gulp-ngdocs": "^0.2.13",
     "gulp-protractor": "~1.0.0",
     "gulp-rename": "~1.2.2",
     "gulp-replace": "~0.5.4",
@@ -48,6 +49,7 @@
     "lodash": "~3.10.1",
     "main-bower-files": "~2.9.0",
     "ng-annotate-loader": "0.0.10",
+    "ngdocs": "^0.1.0",
     "uglify-save-license": "~0.4.1",
     "webpack-stream": "~2.1.0",
     "wiredep": "~2.2.2",

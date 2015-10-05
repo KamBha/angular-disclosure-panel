@@ -1,3 +1,10 @@
+/**
+ * @ngdoc directive
+ * @name dpContainer
+ * 
+ * @description
+ * The directive that stores the disclosure panel.
+ */
 export function DisclosurePanelContainerDirective() {
   'ngInject';
 
@@ -14,13 +21,10 @@ export function DisclosurePanelContainerDirective() {
   return directive;
 }
 
-let data = { isOpen : null };
-
 class DisclosurePanelController {
   constructor ($scope, $element, disclosurePanelDefaults) {
     'ngInject';
-
-    data.isOpen = $scope.disclosurePanelController.isInitiallyOpen;
+    this._isOpen = $scope.disclosurePanelController.isInitiallyOpen;
     this.$scope = $scope;
     this.$element = $element;
     this.disclosurePanelDefaults = disclosurePanelDefaults;
@@ -42,11 +46,11 @@ class DisclosurePanelController {
   }
 
   get isOpen() {
-    return data.isOpen;
+    return this._isOpen;
   }
   
   set isOpen(newIsOpen) {
-    data.isOpen = newIsOpen;
+    this._isOpen = newIsOpen;
   }
 
   updateClass(elem) {

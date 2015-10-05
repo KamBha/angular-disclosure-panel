@@ -14,7 +14,7 @@
       let previousElements;
       scope.disclosurePanelCtrl = disclosurePanelContainerCtrl;
       
-      scope.$watch('disclosurePanelCtrl.isOpen', watchActionGeneratorForDisclosurePanelReveal(conditionToDisplay, 'dpRevealOnOpen'))
+      scope.$watch('disclosurePanelCtrl.isOpen', watchActionGeneratorForDisclosurePanelReveal());
       
       function watchActionGeneratorForDisclosurePanelReveal() {
         return watchAction;

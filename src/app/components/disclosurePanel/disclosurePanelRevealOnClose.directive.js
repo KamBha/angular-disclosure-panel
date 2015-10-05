@@ -4,6 +4,7 @@ export function DisclosurePanelRevealOnCloseDirective(disclosurePanelRevealLinkG
   let directive = {
     restrict: 'A',
     link: disclosurePanelRevealLinkGeneratorService.generateLinkFunction(function(value) { return !value; }, 'dpRevealOnClose'),
+    scope: true,
     transclude: 'element',
     require: '^dpContainer'
   };

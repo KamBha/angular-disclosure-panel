@@ -7,6 +7,7 @@ var git = require('gulp-git');
 var bump = require('gulp-bump');
 var filter = require('gulp-filter');
 var tag_version = require('gulp-tag-version');
+var gulpDocs = require('gulp-ngdocs');
 
 
 var $ = require('gulp-load-plugins')({
@@ -28,6 +29,12 @@ function inc(importance) {
         // **tag it in the repository**
         .pipe(tag_version());
 }
+
+gulp.task('ngdocs', [], function() {
+   return gulp.src(path.join(conf.paths.src, '/app/**/*.js'))
+              .pipe($.ngdocs.process({}))
+              .pipe(gulp.dest('./docs'))
+});
 
 
 gulp.task('prepare-tag', ['build'], function() { 

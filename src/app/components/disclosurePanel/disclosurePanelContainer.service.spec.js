@@ -84,4 +84,27 @@ describe('directive disclosure panel with defaults', function() {
     expect(element.hasClass('newOpen')).toBe(true);
     expect(element.hasClass('newClose')).toBe(false);
   }));
+  
+   it('should change class only for toggled container', inject(function() {
+    $rootScope.isInitiallyOpen = false;
+    disclosurePanelDefaults.openClass = 'newOpen';
+    disclosurePanelDefaults.closeClass = 'newClose';
+    var element = $compile(`<div>
+                              <div dp-container is-initially-open="isInitiallyOpen" id="dp1"></div>
+                              <div dp-container is-initially-open="isInitiallyOpen" id="dp2"></div>
+                            </div>`)($rootScope);
+    var dp1 = element.find('#dp1');
+    var dp2 = element.find('#dp2');
+    $rootScope.$apply();
+    expect(dp1.hasClass('newOpen')).toBe(false);
+    expect(dp1.hasClass('newClose')).toBe(true);
+    expect(dp2.hasClass('newOpen')).toBe(false);
+    expect(dp2.hasClass('newClose')).toBe(true);
+    dp1.controller('dpContainer').toggle();
+    
+    expect(dp1.hasClass('newOpen')).toBe(true);
+    expect(dp1.hasClass('newClose')).toBe(false);
+    expect(dp2.hasClass('newOpen')).toBe(false);
+    expect(dp2.hasClass('newClose')).toBe(true);
+  }));
 });

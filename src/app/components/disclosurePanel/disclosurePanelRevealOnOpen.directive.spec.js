@@ -61,4 +61,33 @@ describe('directive disclosure reveal on open', function() {
 
     expect(element.find('header').length).toBe(0);
   }));
+  
+  it('should not reveal on open panel when other container is toggled closed', inject(function() {
+    $rootScope.isInitiallyOpen = true;
+    var element = $compile(`<div>
+                              <div id ="dp1" dp-container is-initially-open="isInitiallyOpen">
+                                  <p class="toggler" dp-toggler>Toggle</p>
+                                  <header dp-reveal-on-open>Howdy</header>
+                              </div>
+                              <div id ="dp2" dp-container is-initially-open="isInitiallyOpen">
+                                  <p class="toggler" dp-toggler>Toggle</p>
+                                  <header dp-reveal-on-open>Howdy</header>
+                              </div>
+                           </div>`)($rootScope);
+    var dp1 = element.find('#dp1');
+    var dp2 = element.find('#dp2');
+    var trigger = dp1.find('p');
+    $rootScope.$apply();   
+                     
+    expect(dp1.find('header').length).toBe(1);
+    expect(dp2.find('header').length).toBe(1);
+    
+    trigger.triggerHandler('click');
+    
+    dp1 = element.find('#dp1');
+    dp2 = element.find('#dp2');
+
+    expect(dp1.find('header').length).toBe(0);
+    expect(dp2.find('header').length).toBe(1);
+  }));
 });
