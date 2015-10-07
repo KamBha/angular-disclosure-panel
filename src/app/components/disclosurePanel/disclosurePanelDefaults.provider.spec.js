@@ -20,6 +20,7 @@ describe('provider disclosure panel defaults', function() {
 
     expect(defaults.openClass).toBe('dp-open');
     expect(defaults.closeClass).toBe('newClass');
+    expect(defaults.disabledClass).toBe('dp-disabled');
   }));
 
   it('should replace open class when overridden', inject(function() {
@@ -29,5 +30,16 @@ describe('provider disclosure panel defaults', function() {
 
     expect(defaults.openClass).toBe('newClass');
     expect(defaults.closeClass).toBe('dp-close');
+    expect(defaults.disabledClass).toBe('dp-disabled');
+  }));
+  
+  it('should replace disabled class when overridden', inject(function() {
+    provider.overrideDefaults({ 'disabledClass' : 'disabledClass' });
+    
+    let defaults = provider.$get();
+
+    expect(defaults.disabledClass).toBe('disabledClass');
+    expect(defaults.closeClass).toBe('dp-close');
+    expect(defaults.openClass).toBe('dp-open');
   }));
 });
