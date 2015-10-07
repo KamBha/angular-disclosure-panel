@@ -11,7 +11,11 @@ export function DisclosurePanelContainerDirective() {
   let directive = {
     restrict: 'A',
     scope: {
-        isInitiallyOpen: "="
+        isInitiallyOpen: '=',
+        fireEventOnOpen: '@',
+        fireEventOnClose: '@',
+        openOnEvent: '@',
+        closeOnEvent: '@'
     },
     controller: DisclosurePanelController,
     bindToController: true,
@@ -22,10 +26,15 @@ export function DisclosurePanelContainerDirective() {
 }
 
 class DisclosurePanelController {
-  constructor ($scope, $element, disclosurePanelDefaults) {
+  constructor ($scope, $element, disclosurePanelDefaults, $rootScope) {
     'ngInject';
     this._isOpen = $scope.disclosurePanelController.isInitiallyOpen;
     this.$scope = $scope;
+    this.$rootScope = $rootScope;
+    this.fireEventOnOpen = $scope.disclosurePanelController.fireEventOnOpen;
+    this.fireEventOnClose = $scope.disclosurePanelController.fireEventOnClose;
+    this.openOnEvent = $scope.disclosurePanelController.openOnEvent;
+    this.closeOnEvent = $scope.disclosurePanelController.closeOnEvent;
     this.$element = $element;
     this.disclosurePanelDefaults = disclosurePanelDefaults;
     this._init();
@@ -35,9 +44,28 @@ class DisclosurePanelController {
     let isOpenWatcher = () => {
       this.updateClass(this.$element);
     }
+    
+    let closeOnEventRegistration;
+    let openOnEventRegistration;
 
     let onDestroy = () => {
       this.removeWatcher();
+    }
+
+    if (this.closeOnEvent) {
+      closeOnEventRegistration = () => {
+        this.isOpen = false;
+        this.$scope.$apply();
+      }
+      this.$rootScope.$on(this.closeOnEvent, closeOnEventRegistration);
+    }
+    
+    if (this.openOnEvent) {
+      openOnEventRegistration = () => {
+        this.isOpen = true;
+        this.$scope.$apply();
+      }
+      this.$rootScope.$on(this.openOnEvent, openOnEventRegistration);
     }
 
     isOpenWatcher(this.isOpen);
@@ -50,7 +78,16 @@ class DisclosurePanelController {
   }
   
   set isOpen(newIsOpen) {
+
     this._isOpen = newIsOpen;
+    
+    if (this.fireEventOnOpen && newIsOpen) {
+      this.$rootScope.$emit(this.fireEventOnOpen);
+    }
+    
+    if (this.fireEventOnClose && !newIsOpen) {
+      this.$rootScope.$emit(this.fireEventOnClose);
+    }
   }
 
   updateClass(elem) {

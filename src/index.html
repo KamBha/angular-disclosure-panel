@@ -25,8 +25,16 @@
     <![endif]-->
 
     <div class="container">      
-      
-      <div dp-container is-initially-open="true">
+      <div dp-container is-initialy-open="true" fire-event-on-open="expandAll" fire-event-on-close="collapseAll" dp-toggler>
+        <div dp-reveal-on-close>
+          <h2>Expand</h2>
+        </div>
+       
+        <div dp-reveal-on-open>
+          <h2>Collapse</h2>
+        </div>        
+      </div>
+      <div dp-container is-initially-open="true" open-on-event="expandAll" close-on-event="collapseAll">
         <div class="toggler" dp-toggler>Toggle</div>
         <div>Here is some text outside of the main panel</div>
         <div dp-reveal-on-close>
@@ -40,7 +48,7 @@
         </div>
       </div>
       <div>Some other content</div>
-      <div dp-container is-initially-open="true">
+      <div dp-container is-initially-open="true" open-on-event="expandAll" close-on-event="collapseAll">
         <div class="toggler" dp-toggler>Toggle</div>
         <div>Here is some text outside of the main panel</div>
         <div dp-reveal-on-close>
