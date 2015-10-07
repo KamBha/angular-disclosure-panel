@@ -102,7 +102,7 @@ module.exports = function(config) {
       testName: 'Angular disclosure panel'
     },
     
-    captureTimeout: 120000,
+    captureTimeout: 360000,
     customLaunchers: customLaunchers,
     
     browsers: Object.keys(customLaunchers),
