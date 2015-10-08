@@ -11,16 +11,17 @@ export function DisclosurePanelTogglerDirective($log, disclosurePanelDefaults) {
   
   function link(scope, element, attrs, disclosurePanelController) {
     var isDisabled = scope.$eval(attrs['dpTogglerDisabled']);
-
+    scope.containerCtrl = disclosurePanelController;
     scope.$watch(attrs['dpTogglerDisabled'], isDisabledObserver); 
     element.on('click', clickHandler);
     
     scope.$on('destroy', destroy);
     disclosurePanelController.updateClass(element);
+    scope.$watch('containerCtrl.isDisabled', updateDisableClass);
     updateDisableClass();
 
     function clickHandler() {
-      if (!isDisabled) {
+      if (!isDisabled && !disclosurePanelController.isDisabled) {
         disclosurePanelController.toggle();
         disclosurePanelController.updateClass(element);        
       }
@@ -32,7 +33,7 @@ export function DisclosurePanelTogglerDirective($log, disclosurePanelDefaults) {
     }
     
     function updateDisableClass() {
-      if (isDisabled) {
+      if (isDisabled || disclosurePanelController.isDisabled) {
         element.addClass(disclosurePanelDefaults.disabledClass);
       }
       else {

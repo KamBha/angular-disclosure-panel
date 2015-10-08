@@ -141,6 +141,35 @@ describe('directive disclosure panel toggler', function() {
     expect(trigger.hasClass('disabledClass')).toBe(true);        
   }));
   
+  it('should add disabled class if container disabled', inject(function() {
+    $rootScope.isInitiallyOpen = false;
+    $rootScope.isDisabled = false;
+    $rootScope.containerDisabled = true;
+    disclosurePanelDefaults.disabledClass = 'disabledClass';
+    let element = $compile(`<div dp-container is-initially-open="isInitiallyOpen" disabled="containerDisabled">
+                              <p class="toggler" dp-toggler dp-toggler-disabled="isDisabled">Toggle</p>
+                           </div>`)($rootScope);
+    let trigger = element.find('p');
+    $rootScope.$apply();
+    expect(trigger.hasClass('disabledClass')).toBe(true);            
+  }));
+  
+  it('should add disabled class if container disabled after digest', inject(function() {
+    $rootScope.isInitiallyOpen = false;
+    $rootScope.isDisabled = false;
+    $rootScope.containerDisabled = false;
+    disclosurePanelDefaults.disabledClass = 'disabledClass';
+    let element = $compile(`<div dp-container is-initially-open="isInitiallyOpen" disabled="containerDisabled">
+                              <p class="toggler" dp-toggler dp-toggler-disabled="isDisabled">Toggle</p>
+                           </div>`)($rootScope);
+    let trigger = element.find('p');
+    $rootScope.$apply();
+
+    $rootScope.containerDisabled = true;
+    $rootScope.$apply();
+    expect(trigger.hasClass('disabledClass')).toBe(true);            
+  }));
+  
   it('should accept clicks when react to click event is no longer disabled', inject(function() {
     $rootScope.isInitiallyOpen = false;
     $rootScope.isDisabled = true;
@@ -158,6 +187,30 @@ describe('directive disclosure panel toggler', function() {
     expect(trigger.hasClass('dp-close')).toBe(true);
     
     $rootScope.isDisabled = false;
+    $rootScope.$apply();
+    
+    trigger.triggerHandler('click');
+
+    expect(trigger.hasClass('dp-open')).toBe(true);
+    expect(trigger.hasClass('dp-close')).toBe(false);         
+  }));
+
+  it('should no longer accept clicks when container is disabled', inject(function() {
+    $rootScope.isInitiallyOpen = false;
+    $rootScope.isDisabled = false;
+    $rootScope.containerDisabled = false;
+    let element = $compile(`<div dp-container is-initially-open="isInitiallyOpen" disabled="containerDisabled">
+                              <p class="toggler" dp-toggler dp-toggler-disabled="isDisabled">Toggle</p>
+                           </div>`)($rootScope);
+    let trigger = element.find('p');
+    $rootScope.$apply();
+
+    trigger.triggerHandler('click');
+
+    expect(trigger.hasClass('dp-open')).toBe(true);
+    expect(trigger.hasClass('dp-close')).toBe(false);
+    
+    $rootScope.containerDisabled = true;
     $rootScope.$apply();
     
     trigger.triggerHandler('click');

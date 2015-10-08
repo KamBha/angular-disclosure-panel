@@ -5,7 +5,7 @@
      generateLinkFunction: generateLinkFunction
    }  
      
-   function generateLinkFunction(conditionToDisplay, directiveName) {
+   function generateLinkFunction(path, conditionToDisplay, directiveName) {
     return link;
     
     function link(scope, $element, $attr, disclosurePanelContainerCtrl, $transclude) {
@@ -14,7 +14,7 @@
       let previousElements;
       scope.disclosurePanelCtrl = disclosurePanelContainerCtrl;
       
-      scope.$watch('disclosurePanelCtrl.isOpen', watchActionGeneratorForDisclosurePanelReveal());
+      scope.$watch(path, watchActionGeneratorForDisclosurePanelReveal());
       
       function watchActionGeneratorForDisclosurePanelReveal() {
         return watchAction;

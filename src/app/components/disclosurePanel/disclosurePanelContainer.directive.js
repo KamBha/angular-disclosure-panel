@@ -15,7 +15,8 @@ export function DisclosurePanelContainerDirective() {
         fireEventOnOpen: '@',
         fireEventOnClose: '@',
         openOnEvent: '@',
-        closeOnEvent: '@'
+        closeOnEvent: '@',
+        disabled: '='
     },
     controller: DisclosurePanelController,
     bindToController: true,
@@ -28,7 +29,7 @@ export function DisclosurePanelContainerDirective() {
 class DisclosurePanelController {
   constructor ($scope, $element, disclosurePanelDefaults, $rootScope) {
     'ngInject';
-    this._isOpen = $scope.disclosurePanelController.isInitiallyOpen;
+    this._open = $scope.disclosurePanelController.isInitiallyOpen;
     this.$scope = $scope;
     this.$rootScope = $rootScope;
     this.fireEventOnOpen = $scope.disclosurePanelController.fireEventOnOpen;
@@ -45,13 +46,17 @@ class DisclosurePanelController {
       this.updateClass(this.$element);
     }
     
+    let isDisabledWatcher = () => {
+      this.updateDisabledClass(this.$element);
+    }
+    
     let closeOnEventRegistration;
     let openOnEventRegistration;
 
     let onDestroy = () => {
-      this.removeWatcher();
+      this.removeIsOpenWatcher();
     }
-
+    
     if (this.closeOnEvent) {
       closeOnEventRegistration = () => {
         this.isOpen = false;
@@ -69,17 +74,27 @@ class DisclosurePanelController {
     }
 
     isOpenWatcher(this.isOpen);
-    this.removeWatcher = this.$scope.$watch('disclosurePanelController.isOpen', isOpenWatcher);
+    this.removeIsOpenWatcher = this.$scope.$watch('disclosurePanelController.isOpen', isOpenWatcher);
+    this.removeIsDisabledWatcher = this.$scope.$watch('disclosurePanelController.isDisabled', isDisabledWatcher);
     this.$scope.$on('$destroy', onDestroy);
   }
 
+  get isDisabled() {
+    return this.$scope.disclosurePanelController.disabled;
+  }
+  
+  set isDisabled(isDisabled) {
+    this.$scope.disclosurePanelController.disabled = isDisabled;
+  }
+
   get isOpen() {
-    return this._isOpen;
+    return this._open;
   }
   
   set isOpen(newIsOpen) {
-
-    this._isOpen = newIsOpen;
+    if (this.isDisabled)
+      return;
+    this._open = newIsOpen;
     
     if (this.fireEventOnOpen && newIsOpen) {
       this.$rootScope.$emit(this.fireEventOnOpen);
@@ -87,6 +102,15 @@ class DisclosurePanelController {
     
     if (this.fireEventOnClose && !newIsOpen) {
       this.$rootScope.$emit(this.fireEventOnClose);
+    }
+  }
+
+  updateDisabledClass(elem) {
+    if (this.isDisabled) {
+      elem.addClass(this.disclosurePanelDefaults.disabledClass);
+    }
+    else {
+      elem.removeClass(this.disclosurePanelDefaults.disabledClass);
     }
   }
 

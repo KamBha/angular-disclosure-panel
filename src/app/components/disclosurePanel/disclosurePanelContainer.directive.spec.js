@@ -86,6 +86,60 @@ describe('directive disclosure panel with defaults', function() {
     expect(element.hasClass('newClose')).toBe(false);
   }));
   
+  
+  it('should remove class disabled class when no longer disabled', inject(function() {
+    $rootScope.isInitiallyOpen = false;
+    $rootScope.disabled = true;
+    disclosurePanelDefaults.openClass = 'newOpen';
+    disclosurePanelDefaults.closeClass = 'newClose';
+    disclosurePanelDefaults.disabledClass = 'disabledClass';
+    var element = $compile(`<div dp-container disabled="true" is-initially-open="isInitiallyOpen"></div>`)($rootScope);
+    expect(element.hasClass('disabledClass')).toBe(false);
+    $rootScope.disabled = false;
+    $rootScope.$apply();
+       
+    expect(element.hasClass('disabledClass')).toBe(true);
+  }));
+
+  it('should set class to disabled class when disabled', inject(function() {
+    $rootScope.isInitiallyOpen = false;
+    $rootScope.disabled = false;
+    disclosurePanelDefaults.openClass = 'newOpen';
+    disclosurePanelDefaults.closeClass = 'newClose';
+    disclosurePanelDefaults.disabledClass = 'disabledClass';
+    var element = $compile(`<div dp-container disabled="true" is-initially-open="isInitiallyOpen"></div>`)($rootScope);
+    expect(element.hasClass('disabledClass')).toBe(false);
+    $rootScope.disabled = true;
+    $rootScope.$apply();
+       
+    expect(element.hasClass('disabledClass')).toBe(true);
+  }));
+
+  it('should set class to disabled class when disabled', inject(function() {
+    $rootScope.isInitiallyOpen = false;
+    $rootScope.disabled = true;
+    disclosurePanelDefaults.openClass = 'newOpen';
+    disclosurePanelDefaults.closeClass = 'newClose';
+    disclosurePanelDefaults.disabledClass = 'disabledClass';
+    var element = $compile(`<div dp-container disabled="true" is-initially-open="isInitiallyOpen"></div>`)($rootScope);
+    $rootScope.$apply();
+    
+    expect(element.hasClass('disabledClass')).toBe(true);
+  }));
+  
+  it('should ignore toggle when disabled', inject(function() {
+    $rootScope.isInitiallyOpen = false;
+    $rootScope.disabled = true;
+    disclosurePanelDefaults.openClass = 'newOpen';
+    disclosurePanelDefaults.closeClass = 'newClose';
+    var element = $compile(`<div dp-container disabled="true" is-initially-open="isInitiallyOpen"></div>`)($rootScope);
+    $rootScope.$apply();
+    element.controller('dpContainer').toggle();
+    
+    expect(element.hasClass('newOpen')).toBe(false);
+    expect(element.hasClass('newClose')).toBe(true);
+  }));
+  
   it('should fire event event when fireEventOnOpen is specified and panel toggled opened', inject(function() {
     $rootScope.isInitiallyOpen = false;
     disclosurePanelDefaults.openClass = 'newOpen';

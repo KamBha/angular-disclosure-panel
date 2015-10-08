@@ -4,25 +4,23 @@ export function DisclosurePanelOnOpenClassDirective() {
   let directive = {
     restrict: 'A',
     link: link,
-    scope: {
-      'dpOnOpenClass' : '@'
-    },
     require: '^dpContainer'
   };
 
   return directive;
   
   function link(scope, element, attrs, disclosurePanelContainerCtrl) {
+    var onOpenClass = attrs['dpOnOpenClass'];
     scope.disclosurePanelCtrl = disclosurePanelContainerCtrl;
       
     scope.$watch('disclosurePanelCtrl.isOpen', watch)
 
     function watch(value) {
       if (value) {
-        element.addClass(scope.dpOnOpenClass);
+        element.addClass(onOpenClass);
       }
       else {
-        element.removeClass(scope.dpOnOpenClass);
+        element.removeClass(onOpenClass);
       }
     }
     
