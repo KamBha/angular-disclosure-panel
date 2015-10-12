@@ -1,4 +1,5 @@
 /* global */
+import { DisclosurePanelGroupDirective } from '../app/components/disclosurePanel/disclosurePanelGroup.directive';
 import { DisclosurePanelContainerDirective } from '../app/components/disclosurePanel/disclosurePanelContainer.directive';
 import { DisclosurePanelTogglerDirective } from '../app/components/disclosurePanel/disclosurePanelToggler.directive';
 import { DisclosurePanelRevealOnOpenDirective } from '../app/components/disclosurePanel/disclosurePanelRevealOnOpen.directive';
@@ -14,6 +15,7 @@ import { DisclosurePanelOnOpenClassDirective } from '../app/components/disclosur
 
 angular.module('disclosurePanel', ['ngAnimate'])
   .directive('dpContainer', DisclosurePanelContainerDirective)
+  .directive('dpGroup', DisclosurePanelGroupDirective)
   .directive('dpToggler', DisclosurePanelTogglerDirective)
   .directive('dpRevealOnOpen', DisclosurePanelRevealOnOpenDirective)
   .directive('dpRevealOnClose', DisclosurePanelRevealOnCloseDirective)
