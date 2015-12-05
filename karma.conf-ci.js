@@ -40,7 +40,7 @@ module.exports = function(config) {
         browserName: 'firefox',
         version: '39'
       },
-      'SL_Safari': {
+     'SL_Safari': {
         base: 'SauceLabs',
         browserName: 'safari',
         platform: 'OS X 10.10',
@@ -87,6 +87,9 @@ module.exports = function(config) {
     logLevel: 'WARN',
 
     frameworks: ['jasmine'],
+
+    browserNoActivityTimeout: 3600000,
+    browserDisconnectTimeout: 3600000,
 
     plugins : [
       'karma-phantomjs-launcher',
