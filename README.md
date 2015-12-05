@@ -17,7 +17,7 @@ While this library does not try to solve every case where you need to click on s
 # What do I need to run it?
 The code was built with angular 1.4+ (though, in theory, it should work with earlier versions)
 
-It is tested to work on IE9
+It is tested to work on IE9.
 
 # How do I install it?
 The angular disclosure panel is available on bower.  You can install it via:-
