@@ -1,7 +1,7 @@
 /**
  * @ngdoc directive
  * @name dpContainer
- * 
+ *
  * @description
  * The directive that stores the disclosure panel.
  */
@@ -20,14 +20,27 @@ export function DisclosurePanelContainerDirective() {
     },
     controller: DisclosurePanelController,
     bindToController: true,
-    controllerAs: 'disclosurePanelController'
+    link: link,
+    controllerAs: 'disclosurePanelController',
+    require: '?^dpGroup'
   };
 
   return directive;
 }
 
+function link(scope, element, attrs, disclosurePanelGroup) {
+  if (disclosurePanelGroup == null)
+    return;
+  var deregister = disclosurePanelGroup.register(scope.disclosurePanelController);
+  let onDestroy = () => {
+    deregister();
+  }
+  scope.disclosurePanelGroup = disclosurePanelGroup;
+  scope.$on('$destroy', onDestroy);
+}
+
 class DisclosurePanelController {
-  constructor ($scope, $element, disclosurePanelDefaults, $rootScope) {
+  constructor ($scope, $element, disclosurePanelDefaults, $rootScope, $log) {
     'ngInject';
     this._open = $scope.disclosurePanelController.isInitiallyOpen;
     this.$scope = $scope;
@@ -39,24 +52,25 @@ class DisclosurePanelController {
     this.$element = $element;
     this.disclosurePanelDefaults = disclosurePanelDefaults;
     this._init();
+    this.$log = $log;
   }
-  
+
   _init() {
     let isOpenWatcher = () => {
       this.updateClass(this.$element);
     }
-    
+
     let isDisabledWatcher = () => {
       this.updateDisabledClass(this.$element);
     }
-    
+
     let closeOnEventRegistration;
     let openOnEventRegistration;
 
     let onDestroy = () => {
       this.removeIsOpenWatcher();
     }
-    
+
     if (this.closeOnEvent) {
       closeOnEventRegistration = () => {
         this.isOpen = false;
@@ -64,7 +78,7 @@ class DisclosurePanelController {
       }
       this.$rootScope.$on(this.closeOnEvent, closeOnEventRegistration);
     }
-    
+
     if (this.openOnEvent) {
       openOnEventRegistration = () => {
         this.isOpen = true;
@@ -82,7 +96,7 @@ class DisclosurePanelController {
   get isDisabled() {
     return this.$scope.disclosurePanelController.disabled;
   }
-  
+
   set isDisabled(isDisabled) {
     this.$scope.disclosurePanelController.disabled = isDisabled;
   }
@@ -90,18 +104,22 @@ class DisclosurePanelController {
   get isOpen() {
     return this._open;
   }
-  
+
   set isOpen(newIsOpen) {
     if (this.isDisabled)
       return;
     this._open = newIsOpen;
-    
+
     if (this.fireEventOnOpen && newIsOpen) {
       this.$rootScope.$emit(this.fireEventOnOpen);
     }
-    
+
     if (this.fireEventOnClose && !newIsOpen) {
       this.$rootScope.$emit(this.fireEventOnClose);
+    }
+
+    if (this.$scope.disclosurePanelGroup) {
+      this.$scope.disclosurePanelGroup.registerChange(this);
     }
   }
 
@@ -124,7 +142,7 @@ class DisclosurePanelController {
       elem.addClass(this.disclosurePanelDefaults.closeClass);
     }
   }
-  
+
   toggle() {
     this.isOpen = !this.isOpen;
     this.$scope.$apply();
