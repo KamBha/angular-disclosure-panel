@@ -40,12 +40,6 @@ module.exports = function(config) {
         browserName: 'firefox',
         version: '39'
       },
-     'SL_Safari': {
-        base: 'SauceLabs',
-        browserName: 'safari',
-        platform: 'OS X 10.10',
-        version: '8'
-      },
       'SL_IE_9': {
         base: 'SauceLabs',
         browserName: 'internet explorer',
@@ -63,12 +57,6 @@ module.exports = function(config) {
         browserName: 'internet explorer',
         platform: 'Windows 8.1',
         version: '11'
-      },
-      'SL_iOS': {
-        base: "SauceLabs",
-        browserName: "iphone",
-        platform: "OS X 10.10",
-        version: "8.1"
       }
   };
 
