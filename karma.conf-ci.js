@@ -96,15 +96,15 @@ module.exports = function(config) {
       'karma-ng-html2js-preprocessor',
       'karma-sauce-launcher'
     ],
-    
-    
+
+
     sauceLabs: {
       testName: 'Angular disclosure panel'
     },
-    
-    captureTimeout: 360000,
+
+    captureTimeout: 3600000,
     customLaunchers: customLaunchers,
-    
+
     browsers: Object.keys(customLaunchers),
 
     coverageReporter: {
